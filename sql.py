@@ -19,7 +19,7 @@ connection = pymysql.connect(host='localhost',
 with connection:
     with connection.cursor() as cursor:
         # Create a new record
-        sql = "SELECT * FROM activo"
+        sql = "SELECT tasa_x_moneda('GBP')"
         cursor.execute(sql)
         df = pd.DataFrame(cursor.fetchall())
 
