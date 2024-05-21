@@ -1,20 +1,8 @@
-import os
-
 import pandas as pd
-import pymysql.cursors
 from dotenv import load_dotenv
+from utils import get_connection
 
 load_dotenv()
-
-
-# Conectarse a la base de datos
-connection = pymysql.connect(
-    host="localhost",
-    user="root",
-    password=f'{os.getenv("PASSWORD")}',
-    database="dbdatabanco",
-    cursorclass=pymysql.cursors.DictCursor,
-)
 
 
 def insert_into_table(table, container, valores):
@@ -31,6 +19,7 @@ def insert_into_table(table, container, valores):
         Lista de valores a insertar
     """
 
+    connection = get_connection()
     with connection:
         with connection.cursor() as cursor:
             # Create a new record

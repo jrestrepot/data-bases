@@ -33,7 +33,7 @@ if __name__ == "__main__":
     with connection:
         with connection.cursor() as cursor:
             # Create a new record
-            sql = f"SELECT * FROM ultima_fecha_modificacion"
+            sql = f"SELECT * FROM ultima_modificacion"
             cursor.execute(sql)
             df = pd.DataFrame(cursor.fetchall())
             st.dataframe(df)

@@ -1,19 +1,8 @@
 from dotenv import load_dotenv
-import pymysql.cursors
-import os
+from utils import get_connection
 import pandas as pd
 
 load_dotenv()
-
-
-# Conectarse a la base de datos
-connection = pymysql.connect(
-    host="localhost",
-    user="root",
-    password=f'{os.getenv("PASSWORD")}',
-    database="dbdatabanco",
-    cursorclass=pymysql.cursors.DictCursor,
-)
 
 
 def select_from_table(table, container, columnas, condicion, orden):
@@ -33,7 +22,8 @@ def select_from_table(table, container, columnas, condicion, orden):
     orden: str
         Orden de selección
     """
-
+    
+    connection = get_connection()
     with connection:
         with connection.cursor() as cursor:
             # Create a new record

@@ -45,7 +45,7 @@ if __name__ == "__main__":
         page_icon=":nauseated_face:",
     )
 
-    opciones_tablas = ["Activos", "Fondos", "Bolsas", "Monedas"]
+    opciones_tablas = ["activo", "fondo", "moneda"]
     opciones_consultas = [
         "Seleccionar",
         "Insertar",
@@ -54,7 +54,7 @@ if __name__ == "__main__":
         "Eliminar último registro",
     ]
 
-    col1, col2, col3 = st.columns(2)
+    col1, col2, col3 = st.columns(3)
 
     container_opciones = st.container()
 
@@ -68,11 +68,11 @@ if __name__ == "__main__":
     with col3:
         argumentos = {}
         if operacion_seleccionada == "Actualizar":
-            argumentos["id"] = int(st.text_input("Indique el id a actualizar"))
+            argumentos["id"] = st.text_input("Indique el id a actualizar")
             argumentos["columna"] = st.text_input("Indique la columna a actualizar")
             argumentos["valor"] = st.text_input("Indique el nuevo valor")
         if operacion_seleccionada == "Eliminar":
-            argumentos["id"] = int(st.text_input("Indique el id a eliminar"))
+            argumentos["id"] = st.text_input("Indique el id a eliminar")
         if operacion_seleccionada == "Insertar":
             argumentos["valores"] = st.text_input("Indique los valores a insertar")
         if operacion_seleccionada == "Seleccionar":
