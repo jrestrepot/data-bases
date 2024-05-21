@@ -1,10 +1,10 @@
 import streamlit as st
 
-from controllers import sql_select, sql_insert, sql_update, sql_delete
+from controllers import sql_delete, sql_insert, sql_select, sql_update
 
 
 def crear_container_opciones(
-    tabla_seleccionada, consulta_seleccionada, container_opciones
+    tabla_seleccionada, consulta_seleccionada, container_opciones, **kwargs
 ):
     """
     Función para crear el contenedor de opciones
@@ -15,14 +15,27 @@ def crear_container_opciones(
         Nombre de la tabla seleccionada
     consulta_seleccionada: str
         Nombre de la consulta seleccionada
+    container_opciones: container
+        Contenedor de opciones
+    kwargs: dict
+        Argumentos de la consulta
 
     Retornos
     --------
     container_opciones: container
         Contenedor de opciones
     """
+
     if consulta_seleccionada == "Seleccionar":
-        sql_select.select_table(tabla_seleccionada, container_opciones)
+        sql_select.select__from_table(tabla_seleccionada, container_opciones, **kwargs)
+    if consulta_seleccionada == "Insertar":
+        sql_insert.insert_into_table(tabla_seleccionada, container_opciones, **kwargs)
+    if consulta_seleccionada == "Actualizar":
+        sql_update.update_table(tabla_seleccionada, container_opciones, **kwargs)
+    if consulta_seleccionada == "Eliminar":
+        sql_delete.delete_from_table(tabla_seleccionada, container_opciones, **kwargs)
+    if consulta_seleccionada == "Eliminar último registro":
+        sql_delete.delete_last_record(tabla_seleccionada, container_opciones)
 
 
 if __name__ == "__main__":
@@ -33,9 +46,15 @@ if __name__ == "__main__":
     )
 
     opciones_tablas = ["Activos", "Fondos", "Bolsas", "Monedas"]
-    opciones_consultas = ["Seleccionar", "Insertar", "Actualizar", "Eliminar"]
+    opciones_consultas = [
+        "Seleccionar",
+        "Insertar",
+        "Actualizar",
+        "Eliminar",
+        "Eliminar último registro",
+    ]
 
-    col1, col2 = st.columns(2)
+    col1, col2, col3 = st.columns(2)
 
     container_opciones = st.container()
 
@@ -44,12 +63,33 @@ if __name__ == "__main__":
         boton_continuar = st.button("Continuar")
 
     with col2:
-        consulta_seleccionada = st.selectbox("Indique la consulta", opciones_consultas)
+        operacion_seleccionada = st.selectbox("Indique la consulta", opciones_consultas)
+
+    with col3:
+        argumentos = {}
+        if operacion_seleccionada == "Actualizar":
+            argumentos["id"] = int(st.text_input("Indique el id a actualizar"))
+            argumentos["columna"] = st.text_input("Indique la columna a actualizar")
+            argumentos["valor"] = st.text_input("Indique el nuevo valor")
+        if operacion_seleccionada == "Eliminar":
+            argumentos["id"] = int(st.text_input("Indique el id a eliminar"))
+        if operacion_seleccionada == "Insertar":
+            argumentos["valores"] = st.text_input("Indique los valores a insertar")
+        if operacion_seleccionada == "Seleccionar":
+            argumentos["columnas"] = st.text_input("Indique las columnas a seleccionar")
+            argumentos["condicion"] = st.text_input("Indique la condición")
+            argumentos["orden"] = st.text_input("Indique el orden")
 
     if boton_continuar:
-        if tabla_seleccionada != None and consulta_seleccionada != None:
+        if tabla_seleccionada != None and operacion_seleccionada != None:
             st.write(
-                f"Realizando consulta {consulta_seleccionada} en la tabla {tabla_seleccionada}..."
+                f"Realizando operación {operacion_seleccionada} en la tabla {tabla_seleccionada}..."
+            )
+            crear_container_opciones(
+                tabla_seleccionada,
+                operacion_seleccionada,
+                container_opciones,
+                **argumentos,
             )
         else:
             st.warning("Debe seleccionar una tabla y una consulta para continuar.")
