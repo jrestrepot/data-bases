@@ -1,13 +1,12 @@
-import os
-
-import pandas as pd
-import pymysql.cursors
 from dotenv import load_dotenv
+import pymysql.cursors
+import os
+import pandas as pd
 
 load_dotenv()
 
 
-# Connect to the database
+# Conectarse a la base de datos
 connection = pymysql.connect(
     host="localhost",
     user="root",

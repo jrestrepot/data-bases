@@ -27,7 +27,7 @@ def crear_container_opciones(
     """
 
     if consulta_seleccionada == "Seleccionar":
-        sql_select.select__from_table(tabla_seleccionada, container_opciones, **kwargs)
+        sql_select.select_from_table(tabla_seleccionada, container_opciones, **kwargs)
     if consulta_seleccionada == "Insertar":
         sql_insert.insert_into_table(tabla_seleccionada, container_opciones, **kwargs)
     if consulta_seleccionada == "Actualizar":
