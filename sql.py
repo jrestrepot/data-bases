@@ -1,0 +1,26 @@
+from pyodbc import connect
+import pyodbc
+from dotenv import load_dotenv
+import os
+import pymysql.cursors
+import pandas as pd
+
+load_dotenv()
+
+
+# Connect to the database
+connection = pymysql.connect(host='localhost',
+    user='root',
+    password=f'{os.getenv("PASSWORD")}',
+    database='dbdatabanco',
+    cursorclass=pymysql.cursors.DictCursor
+)
+
+with connection:
+    with connection.cursor() as cursor:
+        # Create a new record
+        sql = "SELECT * FROM activo"
+        cursor.execute(sql)
+        df = pd.DataFrame(cursor.fetchall())
+
+print(df)
