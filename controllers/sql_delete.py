@@ -4,6 +4,7 @@ from utils import get_connection
 
 load_dotenv()
 
+
 def delete_from_table(table, container, id):
     """
     Función para eliminar los datos de una tabla
@@ -30,6 +31,7 @@ def delete_from_table(table, container, id):
             container.dataframe(df)
     finally:
         connection.close()
+
 
 def delete_last_record(tabla_seleccionada, container):
     """

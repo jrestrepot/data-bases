@@ -22,7 +22,7 @@ def select_from_table(table, container, columnas, condicion, orden):
     orden: str
         Orden de selección
     """
-    
+
     connection = get_connection()
     with connection:
         with connection.cursor() as cursor:

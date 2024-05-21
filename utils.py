@@ -1,6 +1,7 @@
 import pymysql.cursors
 import os
 
+
 # Conectarse a la base de datos
 def get_connection():
     return pymysql.connect(

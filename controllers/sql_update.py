@@ -1,4 +1,3 @@
-
 import pandas as pd
 from utils import get_connection
 from dotenv import load_dotenv

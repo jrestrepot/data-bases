@@ -29,9 +29,11 @@ def insert_into_table(table, container, columnas, valores):
             print(aux)
             if columnas:
                 print(str.split(columnas))
-                print(f"INSERT INTO {table}({', '.join(str.split(columnas))}) VALUES({', '.join(str.split(valores))})")
+                print(
+                    f"INSERT INTO {table}({', '.join(str.split(columnas))}) VALUES({', '.join(str.split(valores))})"
+                )
                 sql = f"INSERT INTO {table}({', '.join(str.split(columnas))}) VALUES({', '.join(str.split(valores))})"
-                
+
             else:
                 sql = f"INSERT INTO {table} VALUES({', '.join(str.split(valores))})"
             cursor.execute(sql)
