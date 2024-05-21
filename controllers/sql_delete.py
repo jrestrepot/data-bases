@@ -51,6 +51,7 @@ def delete_last_record(tabla_seleccionada, container):
             connection.commit()
             # Fetch the result to show updated state
             cursor.execute(f"SELECT * FROM {tabla_seleccionada}")
+            connection.commit()
             df = pd.DataFrame(cursor.fetchall())
             container.dataframe(df)
     finally:

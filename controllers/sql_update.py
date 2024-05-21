@@ -28,8 +28,10 @@ def update_table(table, container, id, columna, valor):
     try:
         with connection.cursor() as cursor:
             # Create a new record
-            sql = f"UPDATE {table} SET {columna} = '{valor}' WHERE id = {id}"
+            sql = f"UPDATE {table} SET {columna} = {valor} WHERE id = {id}"
             cursor.execute(sql)
+            connection.commit()
+            cursor.execute(f"SELECT * FROM {table}")
             df = pd.DataFrame(cursor.fetchall())
             container.dataframe(df)
     finally:

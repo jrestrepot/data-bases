@@ -74,6 +74,7 @@ if __name__ == "__main__":
         if operacion_seleccionada == "Eliminar":
             argumentos["id"] = st.text_input("Indique el id a eliminar")
         if operacion_seleccionada == "Insertar":
+            argumentos["columnas"] = st.text_input("Indique las columnas a insertar")
             argumentos["valores"] = st.text_input("Indique los valores a insertar")
         if operacion_seleccionada == "Seleccionar":
             argumentos["columnas"] = st.text_input("Indique las columnas a seleccionar")
