@@ -1,0 +1,13 @@
+[theme]
+primaryColor="#001E62"
+backgroundColor="#FFFFFF"
+secondaryBackgroundColor="#B0CCEA"
+textColor="#001E62"
+font="sans serif"
+
+[server]
+port = 9500
+runOnSave = false
+
+[browser]
+gatherUsageStats = false
