@@ -25,5 +25,6 @@ def insert_into_table(table, container, valores):
             # Create a new record
             sql = f"INSERT INTO {table} VALUES ({', '.join(str.split(valores))})"
             cursor.execute(sql)
+            connection.commit()
             df = pd.DataFrame(cursor.fetchall())
             container.dataframe(df)

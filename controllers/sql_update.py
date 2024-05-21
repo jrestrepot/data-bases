@@ -1,4 +1,3 @@
-
 import pandas as pd
 from utils import get_connection
 from dotenv import load_dotenv
@@ -30,6 +29,7 @@ def update_table(table, container, id, columna, valor):
             # Create a new record
             sql = f"UPDATE {table} SET {columna} = '{valor}' WHERE id = {id}"
             cursor.execute(sql)
+            connection.commit()
             df = pd.DataFrame(cursor.fetchall())
             container.dataframe(df)
     finally:
