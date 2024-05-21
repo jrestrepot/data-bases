@@ -11,6 +11,8 @@ opciones_consultas = ["Seleccionar", "Insertar", "Actualizar", "Eliminar"]
 
 col1, col2 = st.columns(2)
 
+container_tabla = st.container()
+
 with col1:
     tabla_seleccionada = st.selectbox("Seleccione una tabla", opciones_tablas)
     boton_continuar = st.button("Continuar")
