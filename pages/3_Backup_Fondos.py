@@ -21,7 +21,7 @@ if __name__ == "__main__":
     # Definimos el título de la página y el ícono
     st.set_page_config(
         page_title="Entrega Final Bases de Datos",
-        page_icon=":nauseated_face:",
+        page_icon=":star:",
     )
 
     st.title("Backup de Fondos")

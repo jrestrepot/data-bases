@@ -4,6 +4,7 @@ from utils import get_connection
 
 load_dotenv()
 
+
 def delete_from_table(table, container, id):
     """
     Función para eliminar los datos de una tabla
@@ -31,6 +32,7 @@ def delete_from_table(table, container, id):
     finally:
         connection.close()
 
+
 def delete_last_record(tabla_seleccionada, container):
     """
     Función para eliminar el último dato de la tabla
@@ -51,6 +53,7 @@ def delete_last_record(tabla_seleccionada, container):
             connection.commit()
             # Fetch the result to show updated state
             cursor.execute(f"SELECT * FROM {tabla_seleccionada}")
+            connection.commit()
             df = pd.DataFrame(cursor.fetchall())
             container.dataframe(df)
     finally:
