@@ -1,19 +1,10 @@
 from dotenv import load_dotenv
-import pymysql.cursors
-import os
+from utils import get_connection
 import pandas as pd
 
 load_dotenv()
 
-
-# Connect to the database
-connection = pymysql.connect(
-    host="localhost",
-    user="root",
-    password=f'{os.getenv("PASSWORD")}',
-    database="dbdatabanco",
-    cursorclass=pymysql.cursors.DictCursor,
-)
+connection = get_connection()
 
 with connection:
     with connection.cursor() as cursor:

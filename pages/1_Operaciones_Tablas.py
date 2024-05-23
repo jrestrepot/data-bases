@@ -27,7 +27,7 @@ def crear_container_opciones(
     """
 
     if consulta_seleccionada == "Seleccionar":
-        sql_select.select__from_table(tabla_seleccionada, container_opciones, **kwargs)
+        sql_select.select_from_table(tabla_seleccionada, container_opciones, **kwargs)
     if consulta_seleccionada == "Insertar":
         sql_insert.insert_into_table(tabla_seleccionada, container_opciones, **kwargs)
     if consulta_seleccionada == "Actualizar":
@@ -42,10 +42,10 @@ if __name__ == "__main__":
     # Definimos el título de la página y el ícono
     st.set_page_config(
         page_title="Entrega Final Bases de Datos",
-        page_icon=":nauseated_face:",
+        page_icon=":star:",
     )
 
-    opciones_tablas = ["Activos", "Fondos", "Bolsas", "Monedas"]
+    opciones_tablas = ["activo", "fondo", "moneda"]
     opciones_consultas = [
         "Seleccionar",
         "Insertar",
@@ -54,7 +54,7 @@ if __name__ == "__main__":
         "Eliminar último registro",
     ]
 
-    col1, col2, col3 = st.columns(2)
+    col1, col2, col3 = st.columns(3)
 
     container_opciones = st.container()
 
@@ -68,12 +68,13 @@ if __name__ == "__main__":
     with col3:
         argumentos = {}
         if operacion_seleccionada == "Actualizar":
-            argumentos["id"] = int(st.text_input("Indique el id a actualizar"))
+            argumentos["id"] = st.text_input("Indique el id a actualizar")
             argumentos["columna"] = st.text_input("Indique la columna a actualizar")
             argumentos["valor"] = st.text_input("Indique el nuevo valor")
         if operacion_seleccionada == "Eliminar":
-            argumentos["id"] = int(st.text_input("Indique el id a eliminar"))
+            argumentos["id"] = st.text_input("Indique el id a eliminar")
         if operacion_seleccionada == "Insertar":
+            argumentos["columnas"] = st.text_input("Indique las columnas a insertar")
             argumentos["valores"] = st.text_input("Indique los valores a insertar")
         if operacion_seleccionada == "Seleccionar":
             argumentos["columnas"] = st.text_input("Indique las columnas a seleccionar")
